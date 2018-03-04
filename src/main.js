@@ -7,13 +7,13 @@ canvas.height = 100;
 
 stretch(canvas);
 
-var pixels_per_second = 30;
+var pixels_per_second = 25;
 var state = {
     ripples: [
         {
             x: 50,
             y: 50,
-            radius: 10,
+            radius: 0,
             color: '#f00',
         }
     ]
@@ -24,6 +24,7 @@ function updateState(state, ms_elapsed, pixels_per_second) {
     if (state.ripples) {
         state.ripples = state.ripples.map(function (ripple) {
             ripple.radius += ms_elapsed / 1000 * pixels_per_second;
+            return ripple;
         });
         // TODO: filter out not visible ripples
     }
