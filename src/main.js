@@ -1,4 +1,6 @@
 var stretch = require('stretch-canvas');
+var updateState = require('./update_state');
+
 var canvas = document.getElementById('ripple-canvas');
 var ctx = canvas.getContext('2d');
 
@@ -19,16 +21,6 @@ var state = {
     ]
 };
 var last_timestamp = null;
-
-function updateState(state, ms_elapsed, pixels_per_second) {
-    if (state.ripples) {
-        state.ripples = state.ripples.map(function (ripple) {
-            ripple.radius += ms_elapsed / 1000 * pixels_per_second;
-            return ripple;
-        });
-        // TODO: filter out not visible ripples
-    }
-}
 
 function paintFrame(ctx, state) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
