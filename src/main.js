@@ -1,5 +1,6 @@
 var stretch = require('stretch-canvas');
 var updateState = require('./update_state');
+var paintFrame = require('./paint_frame');
 
 var canvas = document.getElementById('ripple-canvas');
 var ctx = canvas.getContext('2d');
@@ -24,19 +25,6 @@ var state = {
     ]
 };
 var last_timestamp = null;
-
-function paintFrame(ctx, state) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-    if (state.ripples) {
-        state.ripples.forEach(function (ripple) {
-            ctx.beginPath();
-            ctx.arc(ripple.x, ripple.y, ripple.radius, 0, 2 * Math.PI);
-            ctx.strokeStyle = ripple.color;
-            ctx.stroke();
-        });
-    }
-}
 
 function mainCycle(timestamp) {
     var ms_elapsed = last_timestamp ? (timestamp - last_timestamp) : 0;
