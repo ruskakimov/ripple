@@ -4,8 +4,11 @@ var updateState = require('./update_state');
 var canvas = document.getElementById('ripple-canvas');
 var ctx = canvas.getContext('2d');
 
-canvas.width = 100;
-canvas.height = 100;
+var originalWidth = 100;
+var originalHeight = 100;
+
+canvas.width = originalWidth;
+canvas.height = originalHeight;
 
 stretch(canvas);
 
@@ -39,7 +42,7 @@ function mainCycle(timestamp) {
     var ms_elapsed = last_timestamp ? (timestamp - last_timestamp) : 0;
     last_timestamp = timestamp;
 
-    updateState(state, ms_elapsed, pixels_per_second);
+    updateState(state, ms_elapsed, pixels_per_second, originalWidth, originalHeight);
     paintFrame(ctx, state);
     window.requestAnimationFrame(mainCycle);
 }
