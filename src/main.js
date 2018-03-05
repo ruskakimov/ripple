@@ -1,5 +1,6 @@
 var stretch = require('stretch-canvas').stretch;
 var unstretchCoordinates = require('stretch-canvas').unstretchCoordinates;
+var randomColor = require('randomcolor');
 var updateState = require('./update_state');
 var paintFrame = require('./paint_frame');
 
@@ -38,8 +39,21 @@ function mainCycle(timestamp) {
 
 window.requestAnimationFrame(mainCycle);
 
-canvas.addEventListener('click', function(e) {
-    console.log(e);
-    console.log(e.offsetX, e.offsetY);
-    console.log(unstretchCoordinates(e.offsetX, e.offsetY));
-});
+function addRipple(state, x, y) {
+    state.ripples.push({
+        x: x,
+        y: y,
+        radius: 0,
+        color: randomColor(),
+    });
+}
+
+function handleClick(e) {
+    var rect = canvas.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    var coord = unstretchCoordinates(x, y);
+    addRipple(state, coord[0], coord[1]);
+}
+
+canvas.addEventListener('click', handleClick);

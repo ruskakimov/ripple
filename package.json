@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ruskakimov/ripple#readme",
   "dependencies": {
-    "stretch-canvas": "^0.2.0"
+    "randomcolor": "^0.5.3",
+    "stretch-canvas": "^0.3.2"
   }
 }
