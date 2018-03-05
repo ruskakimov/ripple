@@ -17,14 +17,7 @@ stretch(canvas);
 
 var pixels_per_second = 25;
 var state = {
-    ripples: [
-        {
-            x: 50,
-            y: 50,
-            radius: 0,
-            color: '#f00',
-        }
-    ]
+    ripples: []
 };
 var last_timestamp = null;
 
